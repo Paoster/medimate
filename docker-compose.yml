@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: medimate_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: unless-stopped
+
+  ganache:
+    image: trufflesuite/ganache:latest
+    container_name: medimate_ganache
+    ports:
+      - "8545:8545"
+    command: ["--networkId", "1337", "--gasLimit", "6721975", "--deterministic", "--host", "0.0.0.0"]
+
+volumes:
+  mongo_data:
